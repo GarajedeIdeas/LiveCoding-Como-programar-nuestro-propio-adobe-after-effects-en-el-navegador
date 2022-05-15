@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Playing with video and canvas: Basic filtering</title>
+  <meta charset="UTF-8" />
+  <link href="src/styles.css" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="#">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+  <style>
+    video {
+      visibility: hidden;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video" controls="true" preload="none" src="Mixture_Of_Vibrant_Paints_1793c.mp4" autoplay muted></video>
+  <canvas id="canvas"></canvas>
+
+  <script src="src/2-filter.js"></script>
+  <script>
+    const w = 3840 / 5;
+    const h = 2560 / 5;
+
+    document.getElementById("video").setAttribute("width", w)
+    document.getElementById("video").setAttribute("height", h)
+    document.getElementById("canvas").setAttribute("width", w)
+    document.getElementById("canvas").setAttribute("height", h)
+  </script>
+</body>
+
+</html>
