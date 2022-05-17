@@ -9,7 +9,7 @@ const cocoSsd = require("@tensorflow-models/coco-ssd");
   const canvasDOMEl: HTMLCanvasElement | null = document.getElementById(
     "canvas"
   ) as HTMLCanvasElement;
-  const ctx: RenderingContext | null = canvasDOMEl.getContext("2d");
+  const ctx: CanvasRenderingContext2D | null = canvasDOMEl.getContext("2d");
 
   if (canvasDOMEl === null) return;
   if (ctx === null) return;
@@ -38,30 +38,68 @@ const cocoSsd = require("@tensorflow-models/coco-ssd");
     return array.sort(() => Math.random() - 0.5);
   }
 
-  canvasDOMEl.setAttribute("height", window.innerHeight.toString());
-  canvasDOMEl.setAttribute("width", window.innerWidth.toString());
+  const ratio = 6;
 
-  const ratio = 1;
+  const video = document.querySelector("video");
 
-  const imgCat = new Image();
-  imgCat.src = "cats.jpg";
+  video?.setAttribute("width", (2160 / ratio).toString());
+  video?.setAttribute("height", (4096 / ratio).toString());
 
-  imgCat.onload = async () => {
-    ctx.drawImage(imgCat, 0, 0, imgCat.width / ratio, imgCat.height / ratio);
+  canvasDOMEl.setAttribute("width", (2160 / ratio).toString());
+  canvasDOMEl.setAttribute("height", (4096 / ratio).toString());
 
-    // Load the model.
-    const model = await cocoSsd.load();
-    // Classify the image.
-    const predictions = await model.detect(imgCat);
-    console.log("Predictions: ");
-    console.log(predictions);
+  if (video === null) return;
 
-    predictions.forEach((p: any) => {
-      ctx.beginPath();
-      ctx.rect(p.bbox[0] / ratio, p.bbox[1] / ratio, p.bbox[2] / ratio, p.bbox[3] / ratio);
-      ctx.strokeStyle = `rgba(0, ${randomInt(0, 255)}, 0, 1)`;
-      ctx.stroke();
-      ctx.closePath();
-    });
+  // Load the model.
+  const model = await cocoSsd.load();
+
+  video.onplay = async () => {
+    console.log("playing");
+
+    async function videoPlay() {
+      if (ctx === null) return;
+      ctx.clearRect(0, 0, w, h);
+
+      console.log("xx");
+
+      ctx.drawImage(video as CanvasImageSource, 0, 0, 2160 / ratio, 4096 / ratio);
+
+      // Classify the image.
+      const predictions = await model.detect(video);
+
+      predictions.forEach((p: any) => {
+        ctx.beginPath();
+        ctx.rect(p.bbox[0] / ratio, p.bbox[1] / ratio, p.bbox[2] / ratio, p.bbox[3] / ratio);
+        ctx.strokeStyle = `rgba(0, 100, 0, 1)`;
+        ctx.stroke();
+        ctx.closePath();
+      });
+
+      requestAnimationFrame(videoPlay);
+    }
+
+    videoPlay();
   };
+
+  // const imgCat = new Image();
+  // imgCat.src = "cats.jpg";
+
+  // imgCat.onload = async () => {
+  //   ctx.drawImage(imgCat, 0, 0, imgCat.width / ratio, imgCat.height / ratio);
+
+  //   // Load the model.
+  //   const model = await cocoSsd.load();
+  //   // Classify the image.
+  //   const predictions = await model.detect(imgCat);
+  //   console.log("Predictions: ");
+  //   console.log(predictions);
+
+  //   predictions.forEach((p: any) => {
+  //     ctx.beginPath();
+  //     ctx.rect(p.bbox[0] / ratio, p.bbox[1] / ratio, p.bbox[2] / ratio, p.bbox[3] / ratio);
+  //     ctx.strokeStyle = `rgba(0, ${randomInt(0, 255)}, 0, 1)`;
+  //     ctx.stroke();
+  //     ctx.closePath();
+  //   });
+  // };
 })();

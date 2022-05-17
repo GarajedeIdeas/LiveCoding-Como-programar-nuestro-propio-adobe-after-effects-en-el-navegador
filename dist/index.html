@@ -5,9 +5,23 @@
   <title>Empty project</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="reset.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+    }
+
+    video {
+      /* visibility: hidden; */
+      /* position: absolute; */
+      left: 0;
+      top: 0;
+    }
+  </style>
 </head>
 
 <body>
+  <video src="gato.mp4" id="video" controls muted></video>
   <canvas id="canvas"></canvas>
   <script src="bundle.js"></script>
 </body>
