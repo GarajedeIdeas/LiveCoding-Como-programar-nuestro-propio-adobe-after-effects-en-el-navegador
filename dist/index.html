@@ -2,28 +2,55 @@
 <html>
 
 <head>
-  <title>Empty project</title>
+  <title>Dani Vicario - After Effects en el navegador</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="reset.css">
   <style>
     body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      background-color: #00bf76;
+      justify-content: center;
+      align-items: center;
     }
 
-    video {
-      /* visibility: hidden; */
-      /* position: absolute; */
-      left: 0;
-      top: 0;
+    h1 {
+      font-size: 50px;
+      margin-bottom: 50px;
+      color: white;
+    }
+
+    ol {
+      font-size: 100px;
+      display: flex;
+    }
+
+    li {
+      margin-right: 100px;
+    }
+
+    a {
+      color: rgb(14, 14, 13);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <video src="gato.mp4" id="video" controls muted></video>
-  <canvas id="canvas"></canvas>
-  <script src="bundle.js"></script>
+  <h1>After Effects en el navegador</h1>
+  <ol>
+    <li><a href="imagenes.html">Imágenes</a></li>
+    <li><a href="videos.html">Vídeos</a></li>
+    <li><a href="ML.html">ML</a></li>
+  </ol>
 </body>
 
 </html>
