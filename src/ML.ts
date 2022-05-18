@@ -45,27 +45,27 @@ function shuffle(array: number[]) {
   // Load the model.
   const model = await cocoSsd.load();
 
-  video.onplay = async () => {
-    async function videoPlay() {
-      if (ctx === null) return;
-      ctx.clearRect(0, 0, w, h);
+  // video.onplay = async () => {
+  //   async function videoPlay() {
+  //     if (ctx === null) return;
+  //     ctx.clearRect(0, 0, w, h);
 
-      ctx.drawImage(video as CanvasImageSource, 0, 0, 2160 / ratio, 4096 / ratio);
+  //     ctx.drawImage(video as CanvasImageSource, 0, 0, 2160 / ratio, 4096 / ratio);
 
-      // Classify the image.
-      const predictions = await model.detect(video);
+  //     // Classify the image.
+  //     const predictions = await model.detect(video);
 
-      predictions.forEach((p: any) => {
-        ctx.beginPath();
-        ctx.rect(p.bbox[0] / ratio, p.bbox[1] / ratio, p.bbox[2] / ratio, p.bbox[3] / ratio);
-        ctx.strokeStyle = `rgba(0, 100, 0, 1)`;
-        ctx.stroke();
-        ctx.closePath();
-      });
+  //     predictions.forEach((p: any) => {
+  //       ctx.beginPath();
+  //       ctx.rect(p.bbox[0] / ratio, p.bbox[1] / ratio, p.bbox[2] / ratio, p.bbox[3] / ratio);
+  //       ctx.strokeStyle = `rgba(0, 100, 0, 1)`;
+  //       ctx.stroke();
+  //       ctx.closePath();
+  //     });
 
-      requestAnimationFrame(videoPlay);
-    }
+  //     requestAnimationFrame(videoPlay);
+  //   }
 
-    videoPlay();
-  };
+  //   videoPlay();
+  // };
 })();

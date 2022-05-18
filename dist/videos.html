@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Vídeos</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="reset.css">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+      background-color: black;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .enabled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+    }
+
+    canvas {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <video src="videos/octmesh.mp4" muted controls />
+  <script src="videos.js"></script>
+</body>
+
+</html>
