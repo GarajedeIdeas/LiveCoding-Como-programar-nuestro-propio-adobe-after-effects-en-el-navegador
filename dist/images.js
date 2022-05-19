@@ -20,35 +20,43 @@ const PI_DOUBLE = 2 * Math.PI;
 // eslint-disable-next-line no-unused-vars
 const PI_HALF = Math.PI / 2;
 
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+canvasDOMEl.setAttribute("height", window.innerHeight);
+canvasDOMEl.setAttribute("width", window.innerWidth);
+
 ctx.save();
 
-// const image = new Image();
-// image.src = "img/cat.jpg";
+const catImage = new Image();
+catImage.src = "img/cat.jpg";
 
-// image.onload = () => {
-//   canvasDOMEl.setAttribute("height", image.height);
-//   canvasDOMEl.setAttribute("width", image.width);
+catImage.onload = () => {
+  ctx.drawImage(catImage, 0, 0);
 
-//   // ctx.drawImage(image, 0, 0);
+  const imageData = ctx.getImageData(0, 0, catImage.width, catImage.height);
+  const { data } = imageData;
 
-//   // const blur = new Blur({
-//   //   radius: 5,
-//   //   gaussian: true
-//   // });
+  console.log(data);
 
-//   // blur.init();
-//   // const xx = blur.blurRGBA(canvasDOMEl, null, true);
-//   // ctx.drawImage(xx, 0, 0);
-//   // const imageData = ctx.getImageData(0, 0, image.width, image.height);
+  for (let i = 0; i < data.length - 1; i += 4) {
+    // r data[i]
+    // g data[i+1]
+    // b data[i+2]
+    // alpha (opacity) data[i+3]
+    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+    data[i] = avg;
+    data[i + 1] = avg;
+    data[i + 2] = avg;
+    // data[i] = ///////slide;
+  }
 
-//   // const { data } = imageData;
-
-//   // for (let i = 0; i < data.length - 1; i += 4) {
-//   //   const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-//   //   data[i] = avg;
-//   //   data[i + 1] = avg;
-//   //   data[i + 2] = avg;
-//   // }
-
-//   // ctx.putImageData(imageData, 0, 0);
-// };
+  ctx.putImageData(imageData, 0, 0);
+};

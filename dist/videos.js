@@ -24,31 +24,48 @@ ctx.save();
 
 const videoDOMEl = document.querySelector("video");
 
-videoDOMEl.setAttribute("width", 1920 / 5);
-videoDOMEl.setAttribute("height", 1080 / 5);
+videoDOMEl.setAttribute("width", 1920 / 1.25);
+videoDOMEl.setAttribute("height", 1080 / 1.25);
+
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
 videoDOMEl.onplay = () => {
+  canvasDOMEl.style.display = "block";
   videoDOMEl.className = "enabled";
 
-  canvasDOMEl.setAttribute("width", videoDOMEl.width);
-  canvasDOMEl.setAttribute("height", videoDOMEl.height);
-  canvasDOMEl.style.display = "block";
+  canvasDOMEl.setAttribute("width", 1920 / 1.25);
+  canvasDOMEl.setAttribute("height", 1080 / 1.25);
 
-  function videoPlayback() {
-    ctx.drawImage(videoDOMEl, 0, 0, videoDOMEl.width, videoDOMEl.height);
-
-    const imageData = ctx.getImageData(0, 0, videoDOMEl.width, videoDOMEl.height);
-
+  function playback() {
+    ctx.drawImage(videoDOMEl, 0, 0);
+    const imageData = ctx.getImageData(0, 0, canvasDOMEl.width, canvasDOMEl.height);
     const { data } = imageData;
 
     for (let i = 0; i < data.length - 1; i += 4) {
-      data[i] = 255;
+      // r data[i]
+      // g data[i+1]
+      // b data[i+2]
+      // alpha (opacity) data[i+3]
+      // const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      // data[i] = avg;
+      // data[i + 1] = avg;
+      // data[i + 2] = avg;
+      // data[i] = ///////slide;
+      data[i] = randomInt(0, 255);
+      data[i + 2] = 0;
     }
 
     ctx.putImageData(imageData, 0, 0);
-
-    requestAnimationFrame(videoPlayback);
+    requestAnimationFrame(playback);
   }
 
-  videoPlayback();
+  playback();
 };

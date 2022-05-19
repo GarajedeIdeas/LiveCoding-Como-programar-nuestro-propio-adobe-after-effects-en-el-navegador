@@ -1,33 +1,26 @@
-# test-tensorflow
+# Programar After Effects en el navegador
 
-Empty project.
+## Por Dani Vicario
 
-## Building and running on localhost
+### ¿Necesitas formación en programación creativa, live codings, tienes dudas con el código? https://www.linkedin.com/in/danivicario/
 
-First install dependencies:
+Sígueme en Github
+https://github.com/danivicario
 
-```sh
-npm install
-```
+Mis fotos de flores
+https://www.flickr.com/photos/danivicario
 
-To create a production build:
+Obras generativas en Behance
+https://www.behance.net/danivicario
 
-```sh
-npm run build-prod
-```
+---
 
-To create a development build:
+## [Visita el Workshop](https://www.youtube.com/watch?v=Hs9y-UsHt1Y)
 
-```sh
-npm run build-dev
-```
+Enlace a la presentación: https://docs.google.com/presentation/d/1Ro4zEf6n5ryTP0PD1_0CHKerN1kBhu8-yu5d738nptg/edit?usp=sharing
 
-## Running
+Para instalar el proyecto, ejecuta `npm install` en la carpeta raiz del proyecto y luego `npm start`
 
-```sh
-node dist/bundle.js
-```
+Puedes visitar los archivos del proyecto en `http://localhost:9000/`
 
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
+¡Muchas gracias!
